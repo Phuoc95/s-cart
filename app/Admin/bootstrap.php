@@ -42,7 +42,7 @@ Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
     if (count($languages) > 1) {
         $navbar->left('<div class="btn-group" style="margin:10px 0 0 20px;cursor:pointer;">
                 <span  class="dropdown-toggle usa" data-toggle="dropdown">
-                <img alt="' . $languages[$configs_global->locale]['name'] . '" src="/' . $path_file . '/' . $languages[$configs_global->locale]['icon'] . '" style="height: 25px;">
+                <img alt="' . $languages[app()->getLocale()]['name'] . '" src="/' . $path_file . '/' . $languages[app()->getLocale()]['icon'] . '" style="height: 25px;">
                   <span class="caret"></span>
                 </span>
                 <ul class="dropdown-menu">

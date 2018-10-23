@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\ConfigGlobal;
+use App\Models\Language;
 use Closure;
 
 class LocalizationAdmin
@@ -16,8 +17,12 @@ class LocalizationAdmin
      */
     public function handle($request, Closure $next)
     {
-        $configs_global = ConfigGlobal::first();
-        app()->setLocale($configs_global['locale']);
+
+        $locale_default = ConfigGlobal::first()->locale;
+        $locale_config  = config('app.locale');
+        $locale_array   = Language::where('status', 1)->pluck('code')->toArray();
+        $locale         = (in_array($locale_default, $locale_array)) ? $locale_default : $locale_config;
+        app()->setLocale($locale);
         return $next($request);
     }
 }
